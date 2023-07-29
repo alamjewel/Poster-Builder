@@ -1,6 +1,6 @@
 /**
  * short form of document.querySelector
- * 
+ *
  * @param {String} selector html element
  * @return {Object | null} first element within the document. If not, null is returned.
  */
@@ -38,7 +38,7 @@ const previews = {
  * Show/Hide the section
  *
  * @param {String} element node name.
- * @return {Void } 
+ * @return {Void }
  */
 const toggleView = (element) => {
     sections[element].classList.toggle("hidden");
@@ -96,14 +96,17 @@ for (const input in inputs) {
  *
  * @param {String} type kind of style
  * @param {String} value new value for the style.
- * @return {Void } 
+ * @return {Void }
  */
 const applyTextStyles = (type, value) => {
     // List of styles for alignment & color.
-    const list = type === 'color' ? ["blue-600", "black", "green-600"] : ["left", "center", "right"]
+    const list =
+        type === "color"
+            ? ["blue-600", "black", "green-600"]
+            : ["left", "center", "right"];
 
     // Remove the old style
-    list.forEach(_value => previews.heading.classList.remove(`text-${_value}`))
+    list.forEach((_value) => previews.heading.classList.remove(`text-${_value}`));
 
     // apply the new style.
     previews.heading.classList.add(`text-${value}`);
@@ -113,7 +116,7 @@ const applyTextStyles = (type, value) => {
  * Reneder an anchor tag, then download the image automatically
  *
  * @param {String} dataUrl base64 string as data url.
- * @return {Void } 
+ * @return {Void }
  */
 const download = (dataUrl) => {
     // Generating the file name by a random number
@@ -138,11 +141,11 @@ const download = (dataUrl) => {
  * Prepare the downloading content.
  * By creating a canvas, then bind the source content within the SVG.
  *
- * @return {Void } 
+ * @return {Void }
  */
 const downloadPreprocess = () => {
     // Preview section
-    const sourceContent = selector("previewSection");
+    const sourceContent = selector("#previewSection");
 
     // Creating a canvas element
     const canvas = document.createElement("canvas");
@@ -172,10 +175,10 @@ const downloadPreprocess = () => {
     let replacingString = `id="image"/>`;
 
     // Here we have to set the image fixed width & hieght, otherwise image will be rendered abnormally.
-    const imageWidth = imageDimension.width;
+    const imageWidth = imageDimension.width > 500 ? 500 : imageDimension.width;
     if (imageWidth) {
-        replacingString = `id="image" width="${imageWidth > 500 ? 500 : imageWidth
-            }" height="${imageDimension.height > 300 ? 300 : imageDimension.height}"/>`;
+        const imageHeight = imageDimension.height > 300 ? 300 : imageDimension.height;
+        replacingString = `id="image" width="${imageWidth}" height="${imageHeight}"/>`;
     }
 
     content = content.replace(`id="image">`, replacingString);
@@ -185,7 +188,7 @@ const downloadPreprocess = () => {
 
     // Create an image element with the data URL as the source
     const img = new Image();
-    
+
     img.onload = function () {
         // Draw the image on the canvas
         ctx.drawImage(img, 0, 0);
