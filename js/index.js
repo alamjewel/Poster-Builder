@@ -89,6 +89,20 @@ for (const input in inputs) {
 }
 
 /**
+ * Apply heading text styles. Such as alignment and color
+ *
+ * @param {String} type kind of style
+ * @param {String} value new value for the style.
+ * @return {Void } 
+ */
+const applyTextStyles = (type, value) => {
+    const list = type === 'color' ? ["blue-600", "black", "green-600"] : ["left", "center", "right"]
+
+    list.forEach(_value => previews.heading.classList.remove(`text-${_value}`))
+    previews.heading.classList.add(`text-${value}`);
+};
+
+/**
  * Reneder an anchor tag, then download the image automatically
  *
  * @param {String} dataUrl base64 string as data url.
@@ -112,7 +126,8 @@ const download = (dataUrl) => {
 };
 
 /**
- * Prepare the downloading content
+ * Prepare the downloading content.
+ * By creating and canvas, then bind the source content within the SVG.
  *
  * @return {Void } 
  */
