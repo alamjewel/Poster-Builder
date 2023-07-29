@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html class="h-full bg-gray-100 m-0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="h-full m-0 font-sans">
+    <div id="app">
+      <div class="flex items-stretch min-h-screen p-4 gap-8">
+        <!-- Components section -->
+        <fieldset
+          class="flex-1 border border-solid rounded-md border-purple-300 p-3"
+        >
+          <legend
+            class="relative -bottom-3 flex justify-center gap-2 w-full bg-white shadow-lg rounded-lg p-4"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                d="M12.378 1.602a.75.75 0 00-.756 0L3 6.632l9 5.25 9-5.25-8.622-5.03zM21.75 7.93l-9 5.25v9l8.628-5.032a.75.75 0 00.372-.648V7.93zM11.25 22.18v-9l-9-5.25v8.57a.75.75 0 00.372.648l8.628 5.033z"
+              />
+            </svg>
+            Components
+          </legend>
+          <h3 class="text-center text-3xl font-bold mt-4 mb-2">Items</h3>
+          <div class="flex flex-col gap-4">
+            <!-- Heading section -->
+            <fieldset
+              id="headingSection"
+              class="hidden border border-solid rounded-md border-gray-200"
+            >
+              <legend
+                class="ml-2 bg-gray-300 shadow-lg rounded-lg px-2 text-xs"
+              >
+                Heading
+              </legend>
+              <div class="relative w-full">
+                <div
+                  class="absolute -top-5 -right-2 w-5 h-5 border border-solid border-gray-100 rounded-full bg-white flex items-center justify-center text-red-600 cursor-pointer"
+                  onclick="toggleView('heading')"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    class="w-5 h-5"
+                  >
+                    <path
+                      d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div class="m-4 mt-7">
+                <input
+                  type="text"
+                  id="headingInput"
+                  class="bg-white border border-solid border-gray-50 text-gray-900 text-sm rounded-sm focus:ring-black focus:border-blue-500 block w-full p-2.5"
+                  placeholder="Dashboard"
+                />
+                <div class="flex justify-between mt-3">
+                  <div class="inline-flex rounded-md shadow-sm" role="group">
+                    <button
+                      type="button"
+                      class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
+                    >
+                      <svg
+                        class="w-3 h-3 mr-2"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"
+                        />
+                      </svg>
+                      Left
+                    </button>
+                    <button
+                      type="button"
+                      class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
+                    >
+                      <svg
+                        class="w-3 h-3 mr-2"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M4 12.25V1m0 11.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M4 19v-2.25m6-13.5V1m0 2.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M10 19V7.75m6 4.5V1m0 11.25a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM16 19v-2"
+                        />
+                      </svg>
+                      Center
+                    </button>
+                    <button
+                      type="button"
+                      class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
+                    >
+                      <svg
+                        class="w-3 h-3 mr-2"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          d="M14.707 7.793a1 1 0 0 0-1.414 0L11 10.086V1.5a1 1 0 0 0-2 0v8.586L6.707 7.793a1 1 0 1 0-1.414 1.414l4 4a1 1 0 0 0 1.416 0l4-4a1 1 0 0 0-.002-1.414Z"
+                        />
+                        <path
+                          d="M18 12h-2.55l-2.975 2.975a3.5 3.5 0 0 1-4.95 0L4.55 12H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2Zm-3 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
+                        />
+                      </svg>
+                      Right
+                    </button>
+                  </div>
+
+                  <div class="inline-flex rounded-md shadow-sm" role="group">
+                    <button
+                      type="button"
+                      class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
+                    >
+                      <svg
+                        class="w-3 h-3 mr-2"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"
+                        />
+                      </svg>
+                      Blue
+                    </button>
+                    <button
+                      type="button"
+                      class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
+                    >
+                      <svg
+                        class="w-3 h-3 mr-2"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M4 12.25V1m0 11.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M4 19v-2.25m6-13.5V1m0 2.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M10 19V7.75m6 4.5V1m0 11.25a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM16 19v-2"
+                        />
+                      </svg>
+                      Black
+                    </button>
+                    <button
+                      type="button"
+                      class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
+                    >
+                      <svg
+                        class="w-3 h-3 mr-2"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          d="M14.707 7.793a1 1 0 0 0-1.414 0L11 10.086V1.5a1 1 0 0 0-2 0v8.586L6.707 7.793a1 1 0 1 0-1.414 1.414l4 4a1 1 0 0 0 1.416 0l4-4a1 1 0 0 0-.002-1.414Z"
+                        />
+                        <path
+                          d="M18 12h-2.55l-2.975 2.975a3.5 3.5 0 0 1-4.95 0L4.55 12H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2Zm-3 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
+                        />
+                      </svg>
+                      Green
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Image section -->
+            <fieldset
+              id="imageSection"
+              class="hidden border border-solid rounded-md border-gray-200"
+            >
+              <legend
+                class="ml-2 bg-gray-300 shadow-lg rounded-lg px-2 text-xs"
+              >
+                Poster Image
+              </legend>
+              <div class="relative w-full">
+                <div
+                  class="absolute -top-5 -right-2 w-5 h-5 border border-solid border-gray-100 rounded-full bg-white flex items-center justify-center text-red-600 cursor-pointer"
+                  onclick="toggleView('image')"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    class="w-5 h-5"
+                  >
+                    <path
+                      d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-center m-4 mt-7">
+                <label
+                  for="imageInput"
+                  class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50"
+                >
+                  <div
+                    class="flex flex-col items-center justify-center pt-5 pb-6"
+                  >
+                    <svg
+                      class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 20 16"
+                    >
+                      <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                      />
+                    </svg>
+                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                      <span class="font-semibold">Click to upload</span> or drag
+                      and drop
+                    </p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">
+                      SVG, PNG, JPG or GIF (MAX. 800x400px)
+                    </p>
+                  </div>
+                  <input id="imageInput"type="file" accept="image/*" class="hidden" />
+                </label>
+              </div>
+            </fieldset>
+
+            <!-- Description section -->
+            <fieldset
+              id="descriptionSection"
+              class="hidden border border-solid rounded-md border-gray-200"
+            >
+              <legend
+                class="ml-2 bg-gray-300 shadow-lg rounded-lg px-2 text-xs"
+              >
+                Description
+              </legend>
+              <div class="relative w-full">
+                <div
+                  class="absolute -top-5 -right-2 w-5 h-5 border border-solid border-gray-100 rounded-full bg-white flex items-center justify-center text-red-600 cursor-pointer"
+                  onclick="toggleView('description')"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    class="w-5 h-5"
+                  >
+                    <path
+                      d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div class="m-4 mt-7">
+                <textarea
+                  id="descriptionInput"
+                  rows="4"
+                  class="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Write your thoughts here..."
+                ></textarea>
+              </div>
+            </fieldset>
+
+            <!-- toggleView buttons -->
+            <div class="flex justify-center">
+              <button
+                type="button"
+                id="headingBtn"
+                class="flex-1 text-yellow-600 hover:text-black bg-yellow-100 hover:bg-yellow-300 focus:ring-1 focus:ring-black font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none"
+                onclick="toggleView('heading')"
+              >
+                Heading
+              </button>
+              <button
+                type="button"
+                id="imageBtn"
+                class="flex-1 text-green-600 hover:text-black bg-green-100 hover:bg-green-300 focus:ring-1 focus:ring-green-500 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none"
+                onclick="toggleView('image')"
+              >
+                Image
+              </button>
+              <button
+                type="button"
+                id="descriptionBtn"
+                class="flex-1 text-blue-500 hover:text-black bg-blue-100 hover:bg-blue-300 focus:ring-1 focus:ring-black font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none"
+                onclick="toggleView('description')"
+              >
+                Description
+              </button>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Preview section -->
+        <fieldset
+          class="flex-1 border border-solid rounded-md border-purple-300 p-3"
+        >
+          <legend
+            class="relative -bottom-3 flex justify-center gap-2 w-full bg-white shadow-lg rounded-lg p-4"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75"
+              />
+            </svg>
+            Preview
+          </legend>
+          <div id="previewSection" class="flex flex-col gap-4 mt-16">
+            <div class="flex-1">
+              <h1 id="headingPreview" class="hidden text-6xl w-full"></h1>
+            </div>
+            <div id="imagePreview" class="hidden h-full w-full">
+              <img src="" id="image"/>
+            </div>
+            <div class="flex-1">
+              <p id="descriptionPreview" class="hidden w-full"></p>
+            </div>
+          </div>
+
+          <!-- download button -->
+          <div class="mt-7" onclick="downloadPreprocess()">Download</div>
+        </fieldset>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript" src="js/index.js"></script>
+</html>
