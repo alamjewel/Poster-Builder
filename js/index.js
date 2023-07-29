@@ -1,5 +1,5 @@
 /**
- * short form of document.selector
+ * short form of document.querySelector
  * 
  * @param {String} selector html element
  * @return {Object | null} first element within the document. If not, null is returned.
@@ -53,7 +53,7 @@ for (const input in inputs) {
         inputs[input].addEventListener("change", (e) => {
             const [file] = inputs[input].files;
             if (file) {
-                var reader = new FileReader();
+                const reader = new FileReader();
 
                 reader.onload = function () {
                     const dataUrl = reader.result;
@@ -69,7 +69,10 @@ for (const input in inputs) {
                     image.onload = function () {
                         console.log("loaded");
 
-                        // Get & Set the image width & height in pixels as dataset
+                        /* Get & Set the image width & height in pixels as dataset in the parent node.
+                         * We store the data set in the parent not because, for one case we have to remain
+                         * the image tag as it is.
+                         */
                         previews[input].setAttribute("data-width", image.width);
                         previews[input].setAttribute("data-height", image.height);
                     };
@@ -96,9 +99,13 @@ for (const input in inputs) {
  * @return {Void } 
  */
 const applyTextStyles = (type, value) => {
+    // List of styles for alignment & color.
     const list = type === 'color' ? ["blue-600", "black", "green-600"] : ["left", "center", "right"]
 
+    // Remove the old style
     list.forEach(_value => previews.heading.classList.remove(`text-${_value}`))
+
+    // apply the new style.
     previews.heading.classList.add(`text-${value}`);
 };
 
@@ -116,6 +123,8 @@ const download = (dataUrl) => {
     const a = document.createElement("a");
     a.href = dataUrl;
     a.download = filename;
+
+    // Append the anchor tag to the body tag.
     document.body.appendChild(a);
 
     // Trigger the download
@@ -127,12 +136,13 @@ const download = (dataUrl) => {
 
 /**
  * Prepare the downloading content.
- * By creating and canvas, then bind the source content within the SVG.
+ * By creating a canvas, then bind the source content within the SVG.
  *
  * @return {Void } 
  */
 const downloadPreprocess = () => {
-    const sourceContent = document.getElementById("previewSection");
+    // Preview section
+    const sourceContent = selector("previewSection");
 
     // Creating a canvas element
     const canvas = document.createElement("canvas");
@@ -142,7 +152,7 @@ const downloadPreprocess = () => {
     canvas.height = sourceContent.offsetHeight;
     const ctx = canvas.getContext("2d");
 
-    // For render the image, we are froming an svg here.
+    // For render the image, we are forming an svg.
     let content = `
       <svg xmlns="http://www.w3.org/2000/svg" style="background-color: white" width="${sourceContent.offsetWidth}" height="${sourceContent.offsetHeight}">
         <foreignObject width="100%" height="100%">
@@ -153,14 +163,15 @@ const downloadPreprocess = () => {
       </svg>
     `;
 
+    // Get the image dimension from parent node of image.
     const imageDimension = previews.image.dataset;
 
-    /* While getting the html content, weirdly '/' is missing from image tag. For this reason svg
-     * formation will not valid. So, we have to add the '/' manually
+    /* While getting the html content, unfortunaltely '/' is missing from image tag. For this reason svg
+     * formation will be invalid. So, we have to add the '/' manually.
      */
     let replacingString = `id="image"/>`;
 
-    // Here we have to set the image fixed width & hieght, otherwise image will be abnormally render.
+    // Here we have to set the image fixed width & hieght, otherwise image will be rendered abnormally.
     const imageWidth = imageDimension.width;
     if (imageWidth) {
         replacingString = `id="image" width="${imageWidth > 500 ? 500 : imageWidth
@@ -174,6 +185,7 @@ const downloadPreprocess = () => {
 
     // Create an image element with the data URL as the source
     const img = new Image();
+    
     img.onload = function () {
         // Draw the image on the canvas
         ctx.drawImage(img, 0, 0);
