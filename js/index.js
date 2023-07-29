@@ -38,7 +38,7 @@ const previews = {
  * Show/Hide the section
  *
  * @param {String} element node name.
- * @return {Void }
+ * @return {Void}
  */
 const toggleView = (element) => {
     sections[element].classList.toggle("hidden");
@@ -116,7 +116,7 @@ const applyTextStyles = (type, value) => {
  * Reneder an anchor tag, then download the image automatically
  *
  * @param {String} dataUrl base64 string as data url.
- * @return {Void }
+ * @return {Void}
  */
 const download = (dataUrl) => {
     // Generating the file name by a random number
@@ -141,7 +141,7 @@ const download = (dataUrl) => {
  * Prepare the downloading content.
  * By creating a canvas, then bind the source content within the SVG.
  *
- * @return {Void }
+ * @return {Void}
  */
 const downloadPreprocess = () => {
     // Preview section
@@ -152,50 +152,80 @@ const downloadPreprocess = () => {
 
     // Set the canvas dimensions to match the source content dimensions
     canvas.width = sourceContent.offsetWidth;
-    canvas.height = sourceContent.offsetHeight;
+    canvas.height = sourceContent.offsetHeight + 100;
     const ctx = canvas.getContext("2d");
 
-    // For render the image, we are forming an svg.
-    let content = `
-      <svg xmlns="http://www.w3.org/2000/svg" style="background-color: white" width="${sourceContent.offsetWidth}" height="${sourceContent.offsetHeight}">
-        <foreignObject width="100%" height="100%">
-          <div xmlns="http://www.w3.org/1999/xhtml" style="font: 12px 'Arial'; padding: 20px;">
-            ${sourceContent.innerHTML}
-          </div>
-        </foreignObject>
-      </svg>
-    `;
-
-    // Get the image dimension from parent node of image.
-    const imageDimension = previews.image.dataset;
-
-    /* While getting the html content, unfortunaltely '/' is missing from image tag. For this reason svg
-     * formation will be invalid. So, we have to add the '/' manually.
+    /* We have to manually recreate the source content. Because we are not getting the computed style,
+     * while get the content using inner html.
      */
-    let replacingString = `id="image"/>`;
-
-    // Here we have to set the image fixed width & hieght, otherwise image will be rendered abnormally.
-    const imageWidth = imageDimension.width > 500 ? 500 : imageDimension.width;
-    if (imageWidth) {
-        const imageHeight = imageDimension.height > 300 ? 300 : imageDimension.height;
-        replacingString = `id="image" width="${imageWidth}" height="${imageHeight}"/>`;
+    let content = ``;
+    if (previews.heading.textContent) {
+        // get the computed styles of the heading element
+        const { alignment, color, fontSize } = getHeadingComputedStyle();
+        content += `<h1 style="text-align: ${alignment}; color: ${color}; font-size: ${fontSize}; font-weigth: 400;">${previews.heading.textContent}</h1>`;
     }
 
-    content = content.replace(`id="image">`, replacingString);
+    const image = selector("#image")
+    if (image.src) {
+        // Get the image dimension from parent node of image.
+        const imageDimension = previews.image.dataset;
 
-    // Convert the div content to a data URL
-    const dataUrl = "data:image/svg+xml," + encodeURIComponent(content);
+        // Here we have to set the image fixed width & hieght, otherwise image will be rendered abnormally.
+        const imageWidth = imageDimension.width > 500 ? 500 : imageDimension.width;
+        const imageHeight = imageDimension.height > 300 ? 300 : imageDimension.height;
+        content += `<img src="${image.src}" width="${imageWidth}" height="${imageHeight}" style="display: block; margin: 0 auto;"/>`
+    }
 
-    // Create an image element with the data URL as the source
-    const img = new Image();
+    if (previews.description.textContent) content += `<p style="white-space: pre-wrap;">${previews.description.textContent}</p>`
 
-    img.onload = function () {
-        // Draw the image on the canvas
-        ctx.drawImage(img, 0, 0);
+    // For render the image, we are forming an svg.
+    if (content) {
+        content = `
+          <svg xmlns="http://www.w3.org/2000/svg" style="background-color: white" width="${canvas.width}" height="${canvas.height}">
+            <foreignObject width="100%" height="100%">
+              <div xmlns="http://www.w3.org/1999/xhtml" style="font: 12px 'Arial'; padding: 20px;">
+                ${content}
+              </div>
+            </foreignObject>
+          </svg>
+        `;
 
-        // Download the image.
-        download(canvas.toDataURL());
-    };
+        // Convert the div content to a data URL
+        const dataUrl = "data:image/svg+xml," + encodeURIComponent(content);
 
-    img.src = dataUrl;
+        // Create an image element with the data URL as the source
+        const img = new Image();
+
+        img.onload = function () {
+            // Draw the image on the canvas
+            ctx.drawImage(img, 0, 0);
+
+            // Download the image.
+            download(canvas.toDataURL());
+        };
+
+        img.src = dataUrl;
+    }
 };
+
+
+/**
+ * Get the computed style of heading.
+ *
+ * @return {Object} aligment, color & fontSize
+ */
+const getHeadingComputedStyle = () => {
+    // Get the computed styles of the element
+    const styles = window.getComputedStyle(previews.heading);
+
+    // Get the text alignment property
+    const alignment = styles.getPropertyValue("text-align");
+
+    // Get the text alignment property
+    const color = styles.getPropertyValue("color");
+
+    // Get the text alignment property
+    const fontSize = styles.getPropertyValue("font-size");
+
+    return { alignment, color, fontSize };
+}
